@@ -26,7 +26,7 @@ def process_data(data):
 
   Returns a list of lines that summarize the information.
   """
-  locale.setlocale(locale.LC_ALL, 'en_US.UTF8')
+  locale.setlocale(locale.LC_ALL, 'C.UTF-8')
   max_revenue = {"revenue": 0}
   max_sales = {"total_sales": 0}
   car_years = {}
@@ -43,12 +43,12 @@ def process_data(data):
       max_sales = item
     # TODO: also handle most popular car_year
     year = item["car"]["car_year"]
-    if year not in car_years:
-      car_years[year] = item["total_sales"]
+    if year not in car_year:
+      car_year[year] = item["total_sales"]
     else:
-      car_years[year] += item["total_sales"]
+      car_year[year] += item["total_sales"]
 
-  popular_year_count, popular_year = max(zip(car_years.values(), car_years.keys()))  # get the most popular car year
+  popular_year_count, popular_year = max(zip(car_year.values(), car_year.keys()))  # get the most popular car year
 
   summary = [
     "The {} generated the most revenue: ${}".format(
